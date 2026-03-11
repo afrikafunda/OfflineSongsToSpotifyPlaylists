@@ -4,6 +4,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, jsonify, request, url_for, session, redirect
 import pprint
 import os
+from dotenv import load_dotenv
 import signal
 
 from playlists_manager.db import Database
@@ -21,8 +22,8 @@ TOKEN_INFO = 'token_info'
 
 def create_spotify_oauth():
     return SpotifyOAuth(
-        client_id = '11b314828c96417e9f75f58ad96e3ec6',
-        client_secret = '5ebadf3dc8da4976950ddb35ac447085',
+        CLIENT_ID = os.getenv("CLIENT_ID"),
+        CLIENT_SECRET = os.getenv("CLIENT_SECRET"),
         redirect_uri = url_for('redirect_page', _external=True),
         scope='user-library-read playlist-modify-public playlist-modify-private'
     )
